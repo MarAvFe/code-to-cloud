@@ -24,4 +24,4 @@ jobs:
           repository: hello-pong
           tag_with_sha: true
           path: src/
-          push: false
+          push: true
