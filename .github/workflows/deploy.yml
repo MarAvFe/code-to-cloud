@@ -8,6 +8,16 @@ on:
 
 jobs:
 
+  build:
+    defaults:
+      run:
+        working-directory: ./src
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-go@v2
+    - run: go build *.go
+
+
   docker-image-build:
     runs-on: ubuntu-latest
     steps:
@@ -29,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./terraformy
+        working-directory: ./tf
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -44,7 +54,7 @@ jobs:
 
       - name: Terraform Init
         id: init
-        run: terraform init
+        run: terraform init --backend-config="access_key=$AWS_ACCESS_KEY_ID" --backend-config="secret_key=$AWS_SECRET_ACCESS_KEY"
 
       - name: Terraform Validate
         id: validate
@@ -54,3 +64,7 @@ jobs:
         id: plan
         run: terraform plan -no-color
         continue-on-error: false
+
+      - name: Terraform Apply
+        if: startsWith(github.ref, 'refs/tags/')
+        run: terraform apply -auto-approve

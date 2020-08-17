@@ -45,12 +45,18 @@ Usage
 1. [Create IAM role](https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html#create-service-role) 
 2. Create a [new cluster](https://learn.hashicorp.com/tutorials/terraform/eks)
 
-Pipelines
+Deploy Pipeline
 ---
 
-### Docker image
+### Job - docker-image-build
 
-[This pipeline](.github/workflows/docker-image.yml) builds the docker image and pushes it into [Docker Hub](https://hub.docker.com/repository/docker/hackerman/hello-pong) if the event happened on a tagged commit.
+This job builds the docker image and pushes it into [Docker Hub](https://hub.docker.com/repository/docker/hackerman/hello-pong) if the event happened on a tagged commit.
+
+### Job - provision-k8s-cluster
+
+This job creates an eks cluster
+
+> Note: DO NOT use the name "terraform" to name your terraform folder containing .tf files. It collides with the created binary to execute pipeline's processes and fails with no reasonable output: "Error: No configuration files", as if directory was empty or `working-directory` property was incorrectly set. Unluckily, I couldn't find a source to confirm this but that was the observed behaviour.
 
 Questions
 ---
