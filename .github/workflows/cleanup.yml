@@ -22,7 +22,7 @@ jobs:
 
       - name: Terraform Init
         id: init
-        run: terraform init –backend-config=”bucket=hello-pong-state-bucket”
+        run: terraform init --backend-config="bucket=hello-pong-state-bucket" --backend-config="key=eks/terraform.tfstate"
 
       - name: Terraform Validate
         id: validate

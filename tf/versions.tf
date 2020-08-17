@@ -4,7 +4,7 @@ terraform {
 
   backend "s3" {
     # bucket = "hello-pong-state-bucket"
-    key    = "eks/terraform.tfstate"
+    # key    = "eks/terraform.tfstate"
     region = "us-east-2"
   }
 }
