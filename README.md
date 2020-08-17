@@ -42,8 +42,16 @@ Usage
 
 ### EKS
 
-1. [Create IAM role](https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html#create-service-role) 
+1. [Create IAM role](https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html#create-service-role), also attach S3 permissions
 2. Create a [new cluster](https://learn.hashicorp.com/tutorials/terraform/eks)
+
+### Persistence
+
+Create an S3 bucket 
+
+`$ aws s3 mb s3://hello-pong-tf-bucket --region us-east-2`
+`$ aws s3api put-bucket-versioning --bucket hello-pong-tf-bucket --versioning-configuration Status=Enabled`
+
 
 Deploy Pipeline
 ---
