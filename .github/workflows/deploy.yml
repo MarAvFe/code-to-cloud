@@ -43,7 +43,6 @@ jobs:
 
       - name: aws-iam-authenticator
         uses: prepor/action-aws-iam-authenticator@master
-        run: aws-iam-authenticator version
 
       - name: deploy to cluster
         uses: steebchen/kubectl@master
