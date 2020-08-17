@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "tfrmstate" {
-  bucket        = "hello-pong-state-bucket-auto"
+  bucket        = "hello-pong-state-bucket"
   acl           = "private"
   force_destroy = true
 
