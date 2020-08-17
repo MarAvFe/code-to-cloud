@@ -7,6 +7,7 @@ This project is a small example of the following topics:
 - containerization ([Docker](docker.io))
 - orchestration ([Kubernetes](k8s.io))
 - automated deployment ([Terraform](terraform.io))
+- Kubernetes Chaos
 
 Overview
 ---
@@ -39,12 +40,27 @@ Usage
     2020/08/16 18:25:06 Server listening on port 8080
     ```
 
+### EKS
+
+1. [Create IAM role](https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html#create-service-role) 
+2. Create a [new cluster](https://learn.hashicorp.com/tutorials/terraform/eks)
+
+Pipelines
+---
+
+### Docker image
+
+[This pipeline](.github/workflows/docker-image.yml) builds the docker image and pushes it into [Docker Hub](https://hub.docker.com/repository/docker/hackerman/hello-pong) if the event happened on a tagged commit.
+
 Questions
 ---
 
 ---
 
-# Credit
+# Credit and Sources
 
 - **Pong game:** [https://gist.github.com/straker/81b59eecf70da93af396f963596dfdc5](https://gist.github.com/straker/81b59eecf70da93af396f963596dfdc5)
 - **Host info and k8s** [https://github.com/christianhxc/intro-to-kubernetes](https://github.com/christianhxc/intro-to-kubernetes)
+- **Docker image build and push:** [https://github.com/marketplace/actions/build-and-push-docker-images](https://github.com/marketplace/actions/build-and-push-docker-images)
+- **K8s Chaos Github Action:** [https://github.com/marketplace/actions/kubernetes-chaos](https://github.com/marketplace/actions/kubernetes-chaos)
+- **Terraform Github Action:** [https://github.com/marketplace/actions/hashicorp-setup-terraform](https://github.com/marketplace/actions/hashicorp-setup-terraform)
