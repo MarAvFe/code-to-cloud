@@ -27,7 +27,9 @@ jobs:
 
   provision-k8s-cluster:
     runs-on: ubuntu-latest
-    working-directory: terraform/
+    defaults:
+      run:
+        working-directory: terraform
     steps:
       - uses: actions/checkout@v2
       - uses: hashicorp/setup-terraform@v1.1.0
