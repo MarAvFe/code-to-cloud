@@ -3,7 +3,7 @@ terraform {
   required_version = ">= 0.12"
 
   backend "s3" {
-    bucket = "hello-pong-state-bucket"
+    bucket = "hello-pong-state-bucket-auto"
     key    = "eks/terraform.tfstate"
     region = "us-east-2"
   }
