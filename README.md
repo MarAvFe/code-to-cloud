@@ -94,3 +94,4 @@ Questions
 - **K8s Chaos Github Action:** [https://github.com/marketplace/actions/kubernetes-chaos](https://github.com/marketplace/actions/kubernetes-chaos)
 - **Terraform Github Action:** [https://github.com/marketplace/actions/hashicorp-setup-terraform](https://github.com/marketplace/actions/hashicorp-setup-terraform)
 - **Terraform EKS Cluster:** [https://github.com/hashicorp/learn-terraform-provision-eks-cluster](https://github.com/hashicorp/learn-terraform-provision-eks-cluster)
+- **Low CPU on workers issue:** [https://managedkube.com/kubernetes/k8sbot/troubleshooting/pending/pod/2019/02/22/pending-pod.html](https://managedkube.com/kubernetes/k8sbot/troubleshooting/pending/pod/2019/02/22/pending-pod.html)
