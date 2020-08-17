@@ -1,4 +1,4 @@
-name: pipeline
+name: deploy
 
 on:
   push:
@@ -27,24 +27,25 @@ jobs:
 
   provision-k8s-cluster:
     runs-on: ubuntu-latest
+    working-directory: terraform/
     steps:
       - uses: actions/checkout@v2
       - uses: hashicorp/setup-terraform@v1.1.0
 
       - name: Terraform fmt
         id: fmt
-        run: terraform fmt terraform/
+        run: terraform fmt
         continue-on-error: false
 
       - name: Terraform Init
         id: init
-        run: terraform init terraform/
+        run: terraform init
 
       - name: Terraform Validate
         id: validate
-        run: terraform validate -no-color terraform/
+        run: terraform validate -no-color
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan -no-color terraform/
+        run: terraform plan -no-color
         continue-on-error: false
