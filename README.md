@@ -52,6 +52,21 @@ Create an S3 bucket
 `$ aws s3 mb s3://hello-pong-tf-bucket --region us-east-2`
 `$ aws s3api put-bucket-versioning --bucket hello-pong-tf-bucket --versioning-configuration Status=Enabled`
 
+Then add the following section into a .tf file 
+
+```
+terraform {
+  ...
+
+  backend "s3" {
+    bucket = "hello-pong-state-bucket"
+    key    = "eks/terraform.tfstate"
+    region = "us-east-2"
+  }
+}
+```
+
+Just like that, you enable terraform state saving and can delete the server automatically.
 
 Deploy Pipeline
 ---

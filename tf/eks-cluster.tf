@@ -14,17 +14,15 @@ module "eks" {
   worker_groups = [
     {
       name                          = "worker-group-1"
-      instance_type                 = "t2.micro"
-      additional_userdata           = "echo foo bar"
-      asg_desired_capacity          = 2
+      instance_type                 = var.instance_type
+      asg_desired_capacity          = var.asg_desired_capacity
       additional_security_group_ids = [aws_security_group.worker_group_mgmt_one.id]
     },
     {
       name                          = "worker-group-2"
-      instance_type                 = "t2.micro"
-      additional_userdata           = "echo foo bar"
+      instance_type                 = var.instance_type
+      asg_desired_capacity          = var.asg_desired_capacity
       additional_security_group_ids = [aws_security_group.worker_group_mgmt_two.id]
-      asg_desired_capacity          = 1
     },
   ]
 }
@@ -35,4 +33,11 @@ data "aws_eks_cluster" "cluster" {
 
 data "aws_eks_cluster_auth" "cluster" {
   name = module.eks.cluster_id
+}
+
+locals {
+    asg_desired_capacity = 1
+    asg_max_size = 3
+    asg_min_size = 1
+    instance_type = "t2.small"
 }

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-pong-deployment
+  labels:
+    app: hello-pong
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-pong
+  template:
+    metadata:
+      labels:
+        app: hello-pong
+    spec:
+      containers:
+      - name: hello-pong
+        image: hackerman/hello-pong:latest
+        ports:
+        - containerPort: 8080
