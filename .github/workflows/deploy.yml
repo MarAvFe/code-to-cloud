@@ -8,16 +8,6 @@ on:
 
 jobs:
 
-  build:
-    defaults:
-      run:
-        working-directory: ./src
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-go@v2
-    - run: go build *.go
-
-
   docker-image-build:
     runs-on: ubuntu-latest
     steps:
