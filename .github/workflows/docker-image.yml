@@ -29,18 +29,18 @@ jobs:
 
       - name: Terraform fmt
         id: fmt
-        run: terraform fmt
+        run: terraform fmt terraform/
         continue-on-error: false
 
       - name: Terraform Init
         id: init
-        run: terraform init
+        run: terraform init terraform/
 
       - name: Terraform Validate
         id: validate
-        run: terraform validate -no-color
+        run: terraform validate -no-color terraform/
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan -no-color
+        run: terraform plan -no-color terraform/
         continue-on-error: false
