@@ -5,7 +5,7 @@ metadata:
   labels:
     app: hello-pong
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       app: hello-pong
