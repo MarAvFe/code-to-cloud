@@ -76,7 +76,7 @@ jobs:
         run: |
           mkdir ~/.kube
           terraform output kubectl_config > ~/.kube/eks_kubectl_config
-          terraform output kubectl_config | base64 -w 0 > ~/.kube/eks_kubectl_config64
+          terraform output kubectl_config | base64 > ~/.kube/eks_kubectl_config64
           terraform output cluster_name > ~/.kube/eks_cluster_name
           export KUBECONFIG=~/.kube/eks_kubectl_config
           echo "::set-env name=KUBECONFIG64::~/.kube/eks_kubectl_config64"
