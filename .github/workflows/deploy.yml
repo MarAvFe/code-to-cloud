@@ -72,6 +72,7 @@ jobs:
 
       - name: Configure aws
         run: |
+          mkdir ~/.kube
           echo $(terraform output kubectl_config) > ~/.kube/eks_kubectl_config
           export KUBECONFIG=~/.kube/kubectl_config
           echo $(terraform output cluster_name) > ~/.kube/eks_cluster_name
