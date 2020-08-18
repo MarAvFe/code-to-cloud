@@ -42,7 +42,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
 
-      - name: aws-iam-authenticator
+      - name: Install aws-iam-authenticator
         uses: prepor/action-aws-iam-authenticator@master
 
       - name: Setup Terraform
@@ -76,22 +76,14 @@ jobs:
         run: |
           mkdir ~/.kube
           terraform output kubectl_config > ~/.kube/config
-          terraform output kubectl_config | base64 > ~/.kube/config64
           terraform output cluster_name > ~/.kube/eks_cluster_name
           export KUBECONFIG=~/.kube/config
-          echo "::set-env name=KUBECONFIG64::$(cat ~/.kube/config64)"
           export CLUSTER_NAME=$(cat ~/.kube/eks_cluster_name)
           aws eks --region us-east-2 update-kubeconfig --name $CLUSTER_NAME
 
-      - name: Setup kubectl for deployment
+      - name: Install kubectl
         uses: azure/setup-kubectl@v1
-        #uses: steebchen/kubectl@master
-        #env:
-        #  KUBE_CONFIG_DATA: $KUBECONFIG64
-        #with:
-        # args: apply -f k8s/
 
-      - name: Apply k8s deployment
-        #run: kubectl --kubeconfig ~/.kube/config apply -f k8s/
-        run: kubectl --kubeconfig ~/.kube/config get nodes
+      - name: Apply k8s Deployment
+        run: kubectl --kubeconfig ~/.kube/config apply -f k8s/
  
