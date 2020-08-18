@@ -20,6 +20,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1.1.0
+
       - name: Terraform Init
         id: init
         run: terraform init --backend-config="bucket=hello-pong-state-bucket" --backend-config="key=eks/terraform.tfstate"
