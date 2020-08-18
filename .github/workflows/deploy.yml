@@ -71,7 +71,7 @@ jobs:
         run: terraform apply -auto-approve
 
       - name: Configure aws
-        run: aws eks --region us-east-2 update-kubeconfig --name $(terraform output cluster_name)
+        run: aws eks --region us-east-2 update-kubeconfig --name "$(terraform output cluster_name)"
 
       - name: Setup kubectl for deployment
         uses: steebchen/kubectl@master
