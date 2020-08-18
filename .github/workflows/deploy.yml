@@ -85,4 +85,7 @@ jobs:
 
       - name: Apply k8s Deployment
         run: kubectl --kubeconfig ~/.kube/config apply -f ../k8s/
+
+      - name: Rollout k8s Deployment (update pods)
+        run: kubectl --kubeconfig ~/.kube/config rollout -f ../k8s/deployment.yml
  

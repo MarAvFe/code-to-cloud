@@ -55,7 +55,7 @@ var site = `<!DOCTYPE html>
         <td>%s</td>
       </tr>
     </table>
-    <strong>Press F5 repeatedly to see the IP address cycle</strong>
+    <p><strong>Press F5 repeatedly to see the IP address cycle</strong></p>
     <hr>
   </div>
   <canvas width="750" height="585" id="game"></canvas>
