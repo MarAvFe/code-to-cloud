@@ -72,21 +72,17 @@ jobs:
         # if: startsWith(github.ref, 'refs/tags/')  #
         run: terraform apply -auto-approve
 
-      - name: Configure aws
+      - name: Configure aws k8s credentials
         run: |
           mkdir ~/.kube
-          terraform output kubectl_config | base64 -w 0 > ~/.kube/eks_kubectl_config
-          export KUBECONFIG=~/.kube/eks_kubectl_config
+          terraform output kubectl_config > ~/.kube/eks_kubectl_config
           terraform output cluster_name > ~/.kube/eks_cluster_name
+          export KUBECONFIG=~/.kube/eks_kubectl_config
           export CLUSTER_NAME=$(cat ~/.kube/eks_cluster_name)
-          cat ~/.kube/eks_kubectl_config
-          terraform output kubectl_config
           aws eks --region us-east-2 update-kubeconfig --name $CLUSTER_NAME
 
-      #- name: Setup kubectl for deployment
-      #  uses: steebchen/kubectl@master
-      #  env:
-      #    KUBE_CONFIG_DATA: $KUBECONFIG
-      #  with:
-      #   args: apply -f k8s/
+      - name: Setup kubectl for deployment
+        uses: steebchen/kubectl@master
+        with:
+         args: apply -f k8s/
  
