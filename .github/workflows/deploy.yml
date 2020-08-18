@@ -85,5 +85,5 @@ jobs:
         uses: azure/setup-kubectl@v1
 
       - name: Apply k8s Deployment
-        run: kubectl --kubeconfig ~/.kube/config apply -f k8s/
+        run: kubectl --kubeconfig ~/.kube/config apply -f ../k8s/
  
