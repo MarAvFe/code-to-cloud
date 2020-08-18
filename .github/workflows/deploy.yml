@@ -71,12 +71,12 @@ jobs:
         run: terraform apply -auto-approve
 
       - name: Configure aws
-        run: aws eks --region us-east-2 update-kubeconfig --name "$(terraform output cluster_name)"
+        run: aws eks --region us-east-2 update-kubeconfig --name "$(terraform output cluster_name -no-color)"
 
       - name: Setup kubectl for deployment
         uses: steebchen/kubectl@master
         env:
-          KUBE_CONFIG_DATA: $(terraform output kubectl_config)
+          KUBE_CONFIG_DATA: $(terraform output kubectl_config -no-color)
         with:
          args: apply -f k8s/
  
