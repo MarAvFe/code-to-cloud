@@ -75,11 +75,11 @@ jobs:
       - name: Configure aws k8s credentials
         run: |
           mkdir ~/.kube
-          terraform output kubectl_config > ~/.kube/eks_kubectl_config
-          terraform output kubectl_config | base64 > ~/.kube/eks_kubectl_config64
+          terraform output kubectl_config > ~/.kube/config
+          terraform output kubectl_config | base64 > ~/.kube/config64
           terraform output cluster_name > ~/.kube/eks_cluster_name
-          export KUBECONFIG=~/.kube/eks_kubectl_config
-          echo "::set-env name=KUBECONFIG64::$(cat ~/.kube/eks_kubectl_config64)"
+          export KUBECONFIG=~/.kube/config
+          echo "::set-env name=KUBECONFIG64::$(cat ~/.kube/config64)"
           export CLUSTER_NAME=$(cat ~/.kube/eks_cluster_name)
           aws eks --region us-east-2 update-kubeconfig --name $CLUSTER_NAME
 
@@ -92,5 +92,6 @@ jobs:
         # args: apply -f k8s/
 
       - name: Apply k8s deployment
-        run: kubectl apply -f k8s/
+        #run: kubectl --kubeconfig ~/.kube/config apply -f k8s/
+        run: kubectl --kubeconfig ~/.kube/config get nodes
  
