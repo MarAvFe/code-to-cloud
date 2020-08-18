@@ -73,9 +73,9 @@ jobs:
       - name: Configure aws
         run: |
           mkdir ~/.kube
-          echo $(terraform output kubectl_config) > ~/.kube/eks_kubectl_config
+          echo $(terraform output kubectl_config) 1> ~/.kube/eks_kubectl_config
           export KUBECONFIG=$(cat ~/.kube/eks_kubectl_config)
-          echo $(terraform output cluster_name) > ~/.kube/eks_cluster_name
+          echo $(terraform output cluster_name) 1> ~/.kube/eks_cluster_name
           export CLUSTER_NAME=$(cat ~/.kube/eks_cluster_name)
           echo $CLUSTER_NAME and $KUBECONFIG
           aws eks --region us-east-2 update-kubeconfig --name $CLUSTER_NAME
