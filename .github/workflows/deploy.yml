@@ -84,7 +84,7 @@ jobs:
       - name: Setup kubectl for deployment
         uses: steebchen/kubectl@master
         env:
-          KUBE_CONFIG_DATA: $(base64 -w 0 $KUBECONFIG)
+          KUBE_CONFIG_DATA: $(cat $KUBECONFIG | base64 -w 0)
         with:
          args: apply -f k8s/
  
