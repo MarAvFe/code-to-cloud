@@ -84,9 +84,13 @@ jobs:
           aws eks --region us-east-2 update-kubeconfig --name $CLUSTER_NAME
 
       - name: Setup kubectl for deployment
-        uses: steebchen/kubectl@master
-        env:
-          KUBE_CONFIG_DATA: $KUBECONFIG64
-        with:
-         args: apply -f k8s/
+        uses: azure/setup-kubectl@v1
+        #uses: steebchen/kubectl@master
+        #env:
+        #  KUBE_CONFIG_DATA: $KUBECONFIG64
+        #with:
+        # args: apply -f k8s/
+
+      - name: Apply k8s deployment
+        run: kubectl apply -f k8s/
  
