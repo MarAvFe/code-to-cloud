@@ -25,7 +25,7 @@ func main() {
 
 func hello(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Serving request: %s", r.URL.Path)
-	version := "0.1.0"
+	version := "0.9.0"
 	host, _ := os.Hostname()
 	var ipaddr []string = []string{}
 

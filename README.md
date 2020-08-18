@@ -96,3 +96,4 @@ Questions
 - **Terraform EKS Cluster:** [https://github.com/hashicorp/learn-terraform-provision-eks-cluster](https://github.com/hashicorp/learn-terraform-provision-eks-cluster)
 - **Low CPU on workers issue:** [https://managedkube.com/kubernetes/k8sbot/troubleshooting/pending/pod/2019/02/22/pending-pod.html](https://managedkube.com/kubernetes/k8sbot/troubleshooting/pending/pod/2019/02/22/pending-pod.html)
 - **Terraform init bucket config:** [https://github.com/ArunaLakmal/Terraform-Backend](https://github.com/ArunaLakmal/Terraform-Backend)
+- **Github action kubectl server nos started:** [https://stackoverflow.com/a/51122584](https://stackoverflow.com/a/51122584)

@@ -69,7 +69,6 @@ jobs:
         continue-on-error: false
 
       - name: Terraform Apply
-        # if: startsWith(github.ref, 'refs/tags/')  #
         run: terraform apply -auto-approve
 
       - name: Configure aws k8s credentials
