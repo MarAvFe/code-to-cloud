@@ -9,7 +9,7 @@ This project is a small example of the following topics:
 - continuous integration [Github Actions](https://github.com/features/actions)
 - infrastructure as code ([Terraform](terraform.io))
 - cloud services [AWS](https://aws.amazon.com/)
-- Kubernetes Chaos
+- Kubernetes Chaos Testing [LitmusChaos](https://litmuschaos.io/)
 
 Overview
 ---
@@ -112,6 +112,38 @@ terraform {
 ```
 
 This enables S3 as terraform backend, where the infrastructure state will be saved (`terraform.tfstate`). State persistence enables the destruction of the infrastructure from a separate CI task. First time deployment pipeline is run, it creates the file. Every other time, it updates it's content. It's also read by the terraform destroy action.
+
+---
+
+Test
+---
+
+### Chaos testing
+
+[Litmus Chaos](https://litmuschaos.io/) will be used for this test.
+
+With the created cluster, run the following commands:
+
+```bash
+$ aws eks update-kubeconfig --name hello-pong-eks-30eCLOFM  # Config kubectl credentials
+$ kubectl get pods  # Verify pods were correctly started
+$ kubectl apply -f https://litmuschaos.github.io/litmus/litmus-operator-v1.7.0.yaml  # Install Litmus
+$ kubectl apply -f https://hub.litmuschaos.io/api/chaos/1.7.0?file=charts/generic/experiments.yaml  # Get generic tests
+$ kubectl get all -n litmus  # Verify required resources were created
+NAME                                     READY   STATUS    RESTARTS   AGE
+pod/chaos-operator-ce-66866b6469-bdfzp   1/1     Running   0          7m34s
+
+NAME                             TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/chaos-operator-metrics   ClusterIP   172.20.10.124   <none>        8383/TCP   7m27s
+
+NAME                                READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/chaos-operator-ce   1/1     1            1           7m34s
+
+NAME                                           DESIRED   CURRENT   READY   AGE
+replicaset.apps/chaos-operator-ce-66866b6469   1         1         1       7m34s
+```
+
+> Unfinished. The results were not as expected. Dropped for the scope of this delivery
 
 ---
 
@@ -226,6 +258,8 @@ This was a very straightforward and quick issue to solve thanks to [this answer]
 
 ## TODO
 
+- [ ] Chaos testing
+- [ ] Load testing
 - [ ] Autoscaling
 - [ ] Create IAM role with Terraform
 - [ ] Create and destroy (somehow) S3 bucket with Terraform
